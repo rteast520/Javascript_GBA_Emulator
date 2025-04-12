@@ -74,5 +74,62 @@ Z80 = {
 		Z80._r.pc=0 //execution at zero
 		Z80._r.m = 0;
 		Z80._r.t = 0;
-	}
+	},
+
+	//cross register loads format operation destination and reg to load
+	LDrr_aa: function(){Z80._r.a = Z80._r.a; Z80._r.m = 1; Z80._r.t = 4;},
+	LDrr_ab: function(){Z80._r.a = Z80._r.b; Z80._r.m = 1; Z80._r.t = 4;},
+	LDrr_ac: function(){Z80._r.a = Z80._r.c; Z80._r.m = 1; Z80._r.t = 4;},
+	LDrr_ad: function(){Z80._r.a = Z80._r.d; Z80._r.m = 1; Z80._r.t = 4;},
+	LDrr_ae: function(){Z80._r.a = Z80._r.e; Z80._r.m = 1; Z80._r.t = 4;},
+	LDrr_ah: function(){Z80._r.a = Z80._r.h; Z80._r.m = 1; Z80._r.t = 4;},
+	LDrr_al: function(){Z80._r.a = Z80._r.l; Z80._r.m = 1; Z80._r.t = 4;},
+
+	LDrr_ba: function(){Z80._r.b = Z80._r.a; Z80._r.m = 1; Z80._r.t = 4;},
+	LDrr_bb: function(){Z80._r.b = Z80._r.b; Z80._r.m = 1; Z80._r.t = 4;},
+	LDrr_bc: function(){Z80._r.b = Z80._r.c; Z80._r.m = 1; Z80._r.t = 4;},
+	LDrr_bd: function(){Z80._r.b = Z80._r.d; Z80._r.m = 1; Z80._r.t = 4;},
+	LDrr_be: function(){Z80._r.b = Z80._r.e; Z80._r.m = 1; Z80._r.t = 4;},
+	LDrr_bh: function(){Z80._r.b = Z80._r.h; Z80._r.m = 1; Z80._r.t = 4;},
+	LDrr_bl: function(){Z80._r.b = Z80._r.l; Z80._r.m = 1; Z80._r.t = 4;},
+
+	LDrr_ca: function(){Z80._r.c = Z80._r.a; Z80._r.m = 1; Z80._r.t = 4;},
+	LDrr_cb: function(){Z80._r.c = Z80._r.b; Z80._r.m = 1; Z80._r.t = 4;},
+	LDrr_cc: function(){Z80._r.c = Z80._r.c; Z80._r.m = 1; Z80._r.t = 4;},
+	LDrr_cd: function(){Z80._r.c = Z80._r.d; Z80._r.m = 1; Z80._r.t = 4;},
+	LDrr_ce: function(){Z80._r.c = Z80._r.e; Z80._r.m = 1; Z80._r.t = 4;},
+	LDrr_ch: function(){Z80._r.c = Z80._r.h; Z80._r.m = 1; Z80._r.t = 4;},
+	LDrr_cl: function(){Z80._r.c = Z80._r.l; Z80._r.m = 1; Z80._r.t = 4;},
+
+	LDrr_da: function(){Z80._r.d = Z80._r.a; Z80._r.m = 1; Z80._r.t = 4;},
+	LDrr_db: function(){Z80._r.d = Z80._r.b; Z80._r.m = 1; Z80._r.t = 4;},
+	LDrr_dc: function(){Z80._r.d = Z80._r.c; Z80._r.m = 1; Z80._r.t = 4;},
+	LDrr_dd: function(){Z80._r.d = Z80._r.d; Z80._r.m = 1; Z80._r.t = 4;},
+	LDrr_de: function(){Z80._r.d = Z80._r.e; Z80._r.m = 1; Z80._r.t = 4;},
+	LDrr_dh: function(){Z80._r.d = Z80._r.h; Z80._r.m = 1; Z80._r.t = 4;},
+	LDrr_dl: function(){Z80._r.d = Z80._r.l; Z80._r.m = 1; Z80._r.t = 4;},
+
+	LDrr_ea: function(){Z80._r.e = Z80._r.a; Z80._r.m = 1; Z80._r.t = 4;},
+	LDrr_eb: function(){Z80._r.e = Z80._r.b; Z80._r.m = 1; Z80._r.t = 4;},
+	LDrr_ec: function(){Z80._r.e = Z80._r.c; Z80._r.m = 1; Z80._r.t = 4;},
+	LDrr_ed: function(){Z80._r.e = Z80._r.d; Z80._r.m = 1; Z80._r.t = 4;},
+	LDrr_ee: function(){Z80._r.e = Z80._r.e; Z80._r.m = 1; Z80._r.t = 4;},
+	LDrr_eh: function(){Z80._r.e = Z80._r.h; Z80._r.m = 1; Z80._r.t = 4;},
+	LDrr_el: function(){Z80._r.e = Z80._r.l; Z80._r.m = 1; Z80._r.t = 4;},
+
+	LDrr_ha: function(){Z80._r.h = Z80._r.a; Z80._r.m = 1; Z80._r.t = 4;},
+	LDrr_hb: function(){Z80._r.h = Z80._r.b; Z80._r.m = 1; Z80._r.t = 4;},
+	LDrr_hc: function(){Z80._r.h = Z80._r.c; Z80._r.m = 1; Z80._r.t = 4;},
+	LDrr_hd: function(){Z80._r.h = Z80._r.d; Z80._r.m = 1; Z80._r.t = 4;},
+	LDrr_he: function(){Z80._r.h = Z80._r.e; Z80._r.m = 1; Z80._r.t = 4;},
+	LDrr_hh: function(){Z80._r.h = Z80._r.h; Z80._r.m = 1; Z80._r.t = 4;},
+	LDrr_hl: function(){Z80._r.h = Z80._r.l; Z80._r.m = 1; Z80._r.t = 4;},
+
+	LDrr_la: function(){Z80._r.l = Z80._r.a; Z80._r.m = 1; Z80._r.t = 4;},
+	LDrr_lb: function(){Z80._r.l = Z80._r.b; Z80._r.m = 1; Z80._r.t = 4;},
+	LDrr_lc: function(){Z80._r.l = Z80._r.c; Z80._r.m = 1; Z80._r.t = 4;},
+	LDrr_ld: function(){Z80._r.l = Z80._r.d; Z80._r.m = 1; Z80._r.t = 4;},
+	LDrr_le: function(){Z80._r.l = Z80._r.e; Z80._r.m = 1; Z80._r.t = 4;},
+	LDrr_lh: function(){Z80._r.l = Z80._r.h; Z80._r.m = 1; Z80._r.t = 4;},
+	LDrr_ll: function(){Z80._r.l = Z80._r.l; Z80._r.m = 1; Z80._r.t = 4;},
 }
