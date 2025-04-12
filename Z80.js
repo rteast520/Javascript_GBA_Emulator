@@ -132,4 +132,45 @@ Z80 = {
 	LDrr_le: function(){Z80._r.l = Z80._r.e; Z80._r.m = 1; Z80._r.t = 4;},
 	LDrr_lh: function(){Z80._r.l = Z80._r.h; Z80._r.m = 1; Z80._r.t = 4;},
 	LDrr_ll: function(){Z80._r.l = Z80._r.l; Z80._r.m = 1; Z80._r.t = 4;},
+	
+	//load value to reg address is pc <<8 + l reg
+	LDrHLm_a: function(){Z80._r.a=MMU.rb((Z80._r.pc<<8)+Z80._r.l); Z80._r.m = 2; Z80._r.t = 8;},
+	LDrHLm_b: function(){Z80._r.b=MMU.rb((Z80._r.pc<<8)+Z80._r.l); Z80._r.m = 2; Z80._r.t = 8;},
+	LDrHLm_c: function(){Z80._r.c=MMU.rb((Z80._r.pc<<8)+Z80._r.l); Z80._r.m = 2; Z80._r.t = 8;},
+	LDrHLm_d: function(){Z80._r.d=MMU.rb((Z80._r.pc<<8)+Z80._r.l); Z80._r.m = 2; Z80._r.t = 8;},
+	LDrHLm_e: function(){Z80._r.e=MMU.rb((Z80._r.pc<<8)+Z80._r.l); Z80._r.m = 2; Z80._r.t = 8;},
+	LDrHLm_h: function(){Z80._r.h=MMU.rb((Z80._r.pc<<8)+Z80._r.l); Z80._r.m = 2; Z80._r.t = 8;},
+	LDrHLm_l: function(){Z80._r.l=MMU.rb((Z80._r.pc<<8)+Z80._r.l); Z80._r.m = 2; Z80._r.t = 8;},
+
+	//wrtie word after h roate left and add reg l
+	LDHLmr_a: function(){MMU.wb((Z80._r.h<<8)+Z80._r.l, Z80._r.a); Z80._r.m=2;Z80._r.t=8;},
+	LDHLmr_b: function(){MMU.wb((Z80._r.h<<8)+Z80._r.l, Z80._r.b); Z80._r.m=2;Z80._r.t=8;},
+	LDHLmr_c: function(){MMU.wb((Z80._r.h<<8)+Z80._r.l, Z80._r.c); Z80._r.m=2;Z80._r.t=8;},
+	LDHLmr_d: function(){MMU.wb((Z80._r.h<<8)+Z80._r.l, Z80._r.d); Z80._r.m=2;Z80._r.t=8;},
+	LDHLmr_e: function(){MMU.wb((Z80._r.h<<8)+Z80._r.l, Z80._r.e); Z80._r.m=2;Z80._r.t=8;},
+	LDHLmr_h: function(){MMU.wb((Z80._r.h<<8)+Z80._r.l, Z80._r.h); Z80._r.m=2;Z80._r.t=8;},
+	LDHLmr_l: function(){MMU.wb((Z80._r.h<<8)+Z80._r.l, Z80._r.l); Z80._r.m=2;Z80._r.t=8;},
+
+	//load to reg x from pc
+	LDrn_a: function(){Z80._r.a=MMU.rb(Z80._r.pc); Z80._r.pc++; Z80._r.m = 2; Z80._r.t=8;},
+	LDrn_b: function(){Z80._r.b=MMU.rb(Z80._r.pc); Z80._r.pc++; Z80._r.m = 2; Z80._r.t=8;},
+	LDrn_c: function(){Z80._r.c=MMU.rb(Z80._r.pc); Z80._r.pc++; Z80._r.m = 2; Z80._r.t=8;},
+	LDrn_d: function(){Z80._r.d=MMU.rb(Z80._r.pc); Z80._r.pc++; Z80._r.m = 2; Z80._r.t=8;},
+	LDrn_e: function(){Z80._r.e=MMU.rb(Z80._r.pc); Z80._r.pc++; Z80._r.m = 2; Z80._r.t=8;},
+	LDrn_h: function(){Z80._r.h=MMU.rb(Z80._r.pc); Z80._r.pc++; Z80._r.m = 2; Z80._r.t=8;},
+	LDrn_l: function(){Z80._r.l=MMU.rb(Z80._r.pc); Z80._r.pc++; Z80._r.m = 2; Z80._r.t=8;},
+
+	//read a byte from the pc stack and write it to heap at h<<8 + l
+	LDHLmn: function(){MMU.wb((Z80._r.h<<8)+Z80._r.l, MMU.rb(Z80._r.pc)); Z80._r.pc++; Z80._r.m=3; Z80._r.t=12;},
+	//load word from b<<8 + c to reg a
+	LDBCmA: function(){MMU.wb((Z80._r.b <<8)+Z80._r.c, Z80._r.a); Z80._r.m=2;Z80._r.t=8;},
+	LDDEmA: function(){MMU.wb((Z80._r.d <<8)+Z80._r.e, Z80._r.a); Z80._r.m=2;Z80._r.t=8;},
+	//
+	LDmmA: function(){MMU.wb(MMU.rw(Z80._r.pc), Z80._r.a); Z80._r.pc+=2; Z80._r.m=4; Z80._r.t=16;},
+	// load byte from address b<<8+c to reg a
+	LDABCm: function() {Z80._r.a=MMU.rb((Z80._r.b<<8)+Z80._r.c); Z80._r.m=2;Z80._r.t=8;},
+	LDADEm: function() {Z80._r.a=MMU.rb((Z80._r.d<<8)+Z80._r.e); Z80._r.m=2;Z80._r.t=8;},
+	//
+	LDAmm: function(){Z80._r.a=MMU.rb(MMU.rw(Z80._r.pc)); Z80._r.pc+=2; Z80._r.m=4;Z80._r.t=16;},
+
 }
