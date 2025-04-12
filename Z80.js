@@ -39,6 +39,40 @@ Z80 = {
 	},
 	// push to stack b and C
 	PUSHBC: function(){
-		Z80._r.sp--;  //decrement stack pointer
-		MMU.wb(Z80._r.sp, Z80._r.b);
+		Z80._r.sp--;  //decrement stack pointer to byte beggining
+		MMU.wb(Z80._r.sp, Z80._r.b); //write reg b to mem stack
+		Z80._r.sp --; //decrement stack pointer to byte beginning
+		MMU.wb(Z80._r.sp, Z80._r.c); //write reg c to mem stack
+		//update time regs
+		Z80._r.m = 3;
+		Z80._r.t = 12;
+	},
+	//pop regs h and l off the stack
+	POPHL: function(){
+		Z80._r.l = MMU.rb(Z80._r.sp); //read off the top of the stack
+		Z80._r.sp ++; //increment the stack pointer
+		Z80._r.h = MMU.rb(Z80._r.sp); //read top of the stack pointer
+		Z80._r.sp ++; //increment stack pointer
+		//update time regs
+		Z80._r.m = 3;
+		Z80._r.t = 12
+	},
+	//reads byte from location offset by addr
+	LDAmm: function(){
+		var addr = MMU.rw(Z80._r.pc); //read word addr of pc
+		Z80._r.pc += 2; // increment the pc reg by two bytes
+		Z80._r.a = MMU.rb(addr); //read the byte from the address and store in a
+		//update time regs
+		Z80._r.m = 4;
+		Z80._r.t = 16;
+
+	},
+	//reset cpu at startup/ and reset
+	reset: function(){
+		Z80._r.a = 0; Z80._r.b=0;Z80._r.c=0;Z80._r.d=0;Z80._r.e=0;Z80._r.f=0;
+		Z80._r.h=0;Z80._r.l=0;Z80._r.sp=0;
+		Z80._r.pc=0 //execution at zero
+		Z80._r.m = 0;
+		Z80._r.t = 0;
+	}
 }
