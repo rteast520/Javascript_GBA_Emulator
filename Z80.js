@@ -36,6 +36,9 @@ Z80 = {
 	NOP: function(){
 		//update time regs
 		Z80._r.m = 1; Z80._r.t = 4;
-	}
-
+	},
+	// push to stack b and C
+	PUSHBC: function(){
+		Z80._r.sp--;  //decrement stack pointer
+		MMU.wb(Z80._r.sp, Z80._r.b);
 }
