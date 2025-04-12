@@ -20,5 +20,22 @@ Z80 = {
 		//update time regs
 		Z80._r.m = 1;
 		Z80._r.t = 4; 
+	},
+	// Compare function: comp b to a and sets compare flag
+	CPr_b: function(){
+		var i = Z80._r.a; // copy a
+		i -= Z80._r.b; // subtract b from temp_a
+		Z80._r.f |= 0x40; //set sub flag
+		if(!(i & 255)) Z80._r.f |= 0x80; //check zero
+		if(i<0) Z80._r.f |= 10; //check underflow
+		//Update time regs
+		Z80._r.m = 1; 
+		Z80._r.t = 4;
 	}
+	//NOP function
+	NOP: function(){
+		//update time regs
+		Z80._r.m = 1; Z80._r.t = 4;
+	}
+
 }
