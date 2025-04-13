@@ -31,7 +31,7 @@ Z80 = {
 		//Update time regs
 		Z80._r.m = 1; 
 		Z80._r.t = 4;
-	}
+	},
 	//NOP function
 	NOP: function(){
 		//update time regs
@@ -170,7 +170,15 @@ Z80 = {
 	// load byte from address b<<8+c to reg a
 	LDABCm: function() {Z80._r.a=MMU.rb((Z80._r.b<<8)+Z80._r.c); Z80._r.m=2;Z80._r.t=8;},
 	LDADEm: function() {Z80._r.a=MMU.rb((Z80._r.d<<8)+Z80._r.e); Z80._r.m=2;Z80._r.t=8;},
-	//
+	//read a byte to reg a from a 16bit address on pc
 	LDAmm: function(){Z80._r.a=MMU.rb(MMU.rw(Z80._r.pc)); Z80._r.pc+=2; Z80._r.m=4;Z80._r.t=16;},
+	//read a byte from 8bit address on pc to reg c read from next pc address to reg b
+	LDBCnn: function(){Z80._r.c=MMU.rb(Z80._r.pc); Z80._r.b=MMU.rb(Z80._r.pc+1);Z80._r.pc+=2; Z80._r.m=3;Z80._r.t = 12;}
+	LDDEnn: function(){Z80._r.e=MMU.rb(Z80._r.pc); Z80._r.d=MMU.rb(Z80._r.pc+1);Z80._r.pc+=2; Z80._r.m=3;Z80._r.t = 12;}
+	LDHLnn: function(){Z80._r.l=MMU.rb(Z80._r.pc); Z80._r.h=MMU.rb(Z80._r.pc+1);Z80._r.pc+=2; Z80._r.m=3;Z80._r.t = 12;}
+	LDSPnn: function(){Z80._r.sp=MMU.rw(Z80._r.pc);Z80._r.pc+=2; Z80._r.m=3;Z80._r.t = 12;}
+	//
+	
+
 
 }
