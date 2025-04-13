@@ -173,12 +173,20 @@ Z80 = {
 	//read a byte to reg a from a 16bit address on pc
 	LDAmm: function(){Z80._r.a=MMU.rb(MMU.rw(Z80._r.pc)); Z80._r.pc+=2; Z80._r.m=4;Z80._r.t=16;},
 	//read a byte from 8bit address on pc to reg c read from next pc address to reg b
-	LDBCnn: function(){Z80._r.c=MMU.rb(Z80._r.pc); Z80._r.b=MMU.rb(Z80._r.pc+1);Z80._r.pc+=2; Z80._r.m=3;Z80._r.t = 12;}
-	LDDEnn: function(){Z80._r.e=MMU.rb(Z80._r.pc); Z80._r.d=MMU.rb(Z80._r.pc+1);Z80._r.pc+=2; Z80._r.m=3;Z80._r.t = 12;}
-	LDHLnn: function(){Z80._r.l=MMU.rb(Z80._r.pc); Z80._r.h=MMU.rb(Z80._r.pc+1);Z80._r.pc+=2; Z80._r.m=3;Z80._r.t = 12;}
-	LDSPnn: function(){Z80._r.sp=MMU.rw(Z80._r.pc);Z80._r.pc+=2; Z80._r.m=3;Z80._r.t = 12;}
+	LDBCnn: function(){Z80._r.c=MMU.rb(Z80._r.pc); Z80._r.b=MMU.rb(Z80._r.pc+1);Z80._r.pc+=2; Z80._r.m=3;Z80._r.t = 12;},
+	LDDEnn: function(){Z80._r.e=MMU.rb(Z80._r.pc); Z80._r.d=MMU.rb(Z80._r.pc+1);Z80._r.pc+=2; Z80._r.m=3;Z80._r.t = 12;},
+	LDHLnn: function(){Z80._r.l=MMU.rb(Z80._r.pc); Z80._r.h=MMU.rb(Z80._r.pc+1);Z80._r.pc+=2; Z80._r.m=3;Z80._r.t = 12;},
+	LDSPnn: function(){Z80._r.sp=MMU.rw(Z80._r.pc);Z80._r.pc+=2; Z80._r.m=3;Z80._r.t = 12;},
+	//read address from pc and load byte to l and h. 
+	LDHLmm: function(){var i=MMU.rw(Z80._r.pc); Z80._r.pc+=2; Z80._r.l=MMU.rb(i); Z80._r.h=MMU.rb(i+1); Z80._r.m=5; Z80._r.t=20;},
+	//wtire address from pc to location in regs h<<8 + l
+	LDmmHL: function(){var i = MMU.rw(Z80._r.pc); Z80._r.pc+=2; MMU.ww(i,(Z80._r.h<<8)+Z80._r.l); Z80._r.m=5; Z80._r.t=20;},
+	//write byte and increment address check for overflow from bottom register
+	LDHLIA: function(){MMU.wb((Z80._r.h<<8)+Z80._r.l, Z80._r.a); Z80._r.l=(Z80._r.l+1)&255; if(!Z80._r.l) Z80._r.h=(Z80._r.h+1)&255;Z80._r.m=2;Z80._r.t=8;},
+	LDAHLI: function(){Z80._r.a=MMU.rb((Z80._r.h<<8)+Z80._r.l); Z80._r.l=(Z80._r.l+1)&255; if(!Z80._r.l) Z80._r.h=(Z80._r.h+1)&255; Z80._r.m=2;Z80._r.t=8},
+	//write byte and decrement address check for underflow
+	LDHLDA: function(){MMU.wb((Z80._r.h<<8)+Z80._r.l, Z80._r.a); Z80._r.l=(Z80._r.l-1)&255; if(Z80._r.l==255) Z80._r.h=(Z80._r.h-1)&255;Z80._r.m=2;Z80._r.t=8;},
+	LDAHLI: function(){Z80._r.a=MMU.rb((Z80._r.h<<8)+Z80._r.l); Z80._r.l=(Z80._r.l-1)&255; if(Z80._r.l==255) Z80._r.h=(Z80._r.h-1)&255; Z80._r.m=2;Z80._r.t=8},
 	//
 	
-
-
 }
