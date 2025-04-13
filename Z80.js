@@ -187,6 +187,22 @@ Z80 = {
 	//write byte and decrement address check for underflow
 	LDHLDA: function(){MMU.wb((Z80._r.h<<8)+Z80._r.l, Z80._r.a); Z80._r.l=(Z80._r.l-1)&255; if(Z80._r.l==255) Z80._r.h=(Z80._r.h-1)&255;Z80._r.m=2;Z80._r.t=8;},
 	LDAHLI: function(){Z80._r.a=MMU.rb((Z80._r.h<<8)+Z80._r.l); Z80._r.l=(Z80._r.l-1)&255; if(Z80._r.l==255) Z80._r.h=(Z80._r.h-1)&255; Z80._r.m=2;Z80._r.t=8},
+	//read from addr after 0xFF00 aka halfway in memory addr
+	LDAIOn: function(){Z80._r.a=MMU.rb(0xFF00+MMU.rb(Z80._r.pc)); Z80._r.pc++;Z80._r.m=3;Z80._r.t=12},
+	LDIOnA: function(){MMU.wb(0xFF00+MMU.rb(Z80._r.pc), Z80._r.a); Z80._r.pc++; Z80._r.m=3;Z80._r.t=12;},
+	LDAIOC: function(){Z80._r.a= MMU.rb(0xFF00+Z80._r.c); Z80._r.m=2;Z80._r.t=8}, 
+	LDIOCA: function(){MMU.wb(0xFF00+Z80._r.c, Z80._r.a); Z80._r.m=2;Z80._r.t=8}, 
 	//
-	
+	LDHLSPn: function(){var i=MMU.rb(Z80._r.pc); if(i>27) i-=((~i+1)&255); Z80._r.pc++; i+=Z80._r.sp; Z80._r.h=(i>>8)&255; Z80._r.l=i&255;Z80._rm=3;Z80._r.t=12;},
+	//
+	SWAPr_b: function(){var tr = Z80._r.b; Z80._r.b=MMU.rb((Z80._r.h<<8)+Z80._r.l); MMU.wb((Z80._r.h<<8)+Z80._r.l, tr); Z80._r.m=4; Z80._r.t=16;},
+	SWAPr_a: function(){var tr = Z80._r.a; Z80._r.a=MMU.rb((Z80._r.h<<8)+Z80._r.l); MMU.wb((Z80._r.h<<8)+Z80._r.l, tr); Z80._r.m=4; Z80._r.t=16;},
+	SWAPr_c: function(){var tr = Z80._r.c; Z80._r.c=MMU.rb((Z80._r.h<<8)+Z80._r.l); MMU.wb((Z80._r.h<<8)+Z80._r.l, tr); Z80._r.m=4; Z80._r.t=16;},
+	SWAPr_d: function(){var tr = Z80._r.d; Z80._r.d=MMU.rb((Z80._r.h<<8)+Z80._r.l); MMU.wb((Z80._r.h<<8)+Z80._r.l, tr); Z80._r.m=4; Z80._r.t=16;},
+	SWAPr_e: function(){var tr = Z80._r.e; Z80._r.e=MMU.rb((Z80._r.h<<8)+Z80._r.l); MMU.wb((Z80._r.h<<8)+Z80._r.l, tr); Z80._r.m=4; Z80._r.t=16;},
+	SWAPr_h: function(){var tr = Z80._r.h; Z80._r.h=MMU.rb((Z80._r.h<<8)+Z80._r.l); MMU.wb((Z80._r.h<<8)+Z80._r.l, tr); Z80._r.m=4; Z80._r.t=16;},
+	SWAPr_l: function(){var tr = Z80._r.l; Z80._r.l=MMU.rb((Z80._r.h<<8)+Z80._r.l); MMU.wb((Z80._r.h<<8)+Z80._r.l, tr); Z80._r.m=4; Z80._r.t=16;},
+	//
+	ADDr_a: function(){Z80._r.a += Z80._r.e;Z80._r.f = 0;if(!(Z80._r.a & 255)) Z80._r.f |=0x80;if(Z80._r.a > 255) Z80._r.f |= 0x10;Z80._r.a &= 255;Z80._r.m = 1;Z80._r.t = 4; 
+	},
 }
