@@ -229,5 +229,11 @@ Z80 = {
 	//sub with underflow flag
 	SUBr_a: function(){Z80._r.a-=Z80._r.a; Z80.ops.fz(Z80._r.a,1); if(Z80._r.a < 0) Z80._r.f|=0x10; Z80._r.a&=255; Z80._r,m=1;Z80._r.t=4;},
 	SUBr_b: function(){Z80._r.a-=Z80._r.b; Z80.ops.fz(Z80._r.a,1); if(Z80._r.a < 0) Z80._r.f|=0x10; Z80._r.a&=255; Z80._r,m=1;Z80._r.t=4;},
+	SUBr_c: function(){Z80._r.a-=Z80._r.c; Z80.ops.fz(Z80._r.a,1); if(Z80._r.a < 0) Z80._r.f|=0x10; Z80._r.a&=255; Z80._r,m=1;Z80._r.t=4;},
+	SUBr_d: function(){Z80._r.a-=Z80._r.d; Z80.ops.fz(Z80._r.a,1); if(Z80._r.a < 0) Z80._r.f|=0x10; Z80._r.a&=255; Z80._r,m=1;Z80._r.t=4;},
+	SUBr_e: function(){Z80._r.a-=Z80._r.e; Z80.ops.fz(Z80._r.a,1); if(Z80._r.a < 0) Z80._r.f|=0x10; Z80._r.a&=255; Z80._r,m=1;Z80._r.t=4;},
+	SUBr_h: function(){Z80._r.a-=Z80._r.h; Z80.ops.fz(Z80._r.a,1); if(Z80._r.a < 0) Z80._r.f|=0x10; Z80._r.a&=255; Z80._r,m=1;Z80._r.t=4;},
+	SUBr_l: function(){Z80._r.a-=Z80._r.l; Z80.ops.fz(Z80._r.a,1); if(Z80._r.a < 0) Z80._r.f|=0x10; Z80._r.a&=255; Z80._r,m=1;Z80._r.t=4;},
+	
 
 }
