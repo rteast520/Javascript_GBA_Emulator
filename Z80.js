@@ -257,6 +257,6 @@ Z80 = {
 	CPr_h: function(){var i = Z80._r.a; i-=Z80._r.h; Z80.ops.fz(i,1); if(i<0)Z80._r.f|=0x10; i&=255;Z80._r.m=1;Z80._r.t=4;},
 	CPr_l: function(){var i = Z80._r.a; i-=Z80._r.l; Z80.ops.fz(i,1); if(i<0)Z80._r.f|=0x10; i&=255;Z80._r.m=1;Z80._r.t=4;},
 	//checks if value from memory would set memory flag
-	CPHL: function{var i = Z80._r.a; i-=MMU.rb((Z80._r.h<<8)+Z80._r.l); Z80.ops.fz(i,1); if(i<0)Z80._r.f|=0x10; i&=255;Z80._r.m=2;Z80._r.t=8;},
-	CPn: function{var i = Z80._r.a; i-=MMU.rb(pc);Z80._r.pc++; Z80.ops.fz(i,1); if(i<0)Z80._r.f|=0x10; i&=255;Z80._r.m=2;Z80._r.t=8;},
+	CPHL: function(){var i = Z80._r.a; i-=MMU.rb((Z80._r.h<<8)+Z80._r.l); Z80.ops.fz(i,1); if(i<0)Z80._r.f|=0x10; i&=255;Z80._r.m=2;Z80._r.t=8;},
+	CPn: function(){var i = Z80._r.a; i-=MMU.rb(pc);Z80._r.pc++; Z80.ops.fz(i,1); if(i<0)Z80._r.f|=0x10; i&=255;Z80._r.m=2;Z80._r.t=8;},
 }
