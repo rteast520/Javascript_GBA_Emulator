@@ -245,5 +245,7 @@ Z80 = {
 	SBCr_e: function(){Z80._r.a-=Z80._r.e; Z80._r.a-=(Z80._r.f&0x10)?1:0; Z80.ops.fz(Z80._r.a,1); if(Z80._r.a<0)Z80._r.f|=0x10; Z80._r.a&=255; Z80._r.m=1;Z80._r.t=4;},
 	SBCr_h: function(){Z80._r.a-=Z80._r.h; Z80._r.a-=(Z80._r.f&0x10)?1:0; Z80.ops.fz(Z80._r.a,1); if(Z80._r.a<0)Z80._r.f|=0x10; Z80._r.a&=255; Z80._r.m=1;Z80._r.t=4;},
 	SBCr_l: function(){Z80._r.a-=Z80._r.l; Z80._r.a-=(Z80._r.f&0x10)?1:0; Z80.ops.fz(Z80._r.a,1); if(Z80._r.a<0)Z80._r.f|=0x10; Z80._r.a&=255; Z80._r.m=1;Z80._r.t=4;},
-
+	//sub and sub carry flag from memory
+	SBCHL: function(){Z80._r.a-=MMU.rb((Z80._r.h<<8)+Z80._r.l); Z80._r.a-=(Z80._r.f&0x10)?1:0; Z80.ops.fz(Z80._r.a,1); if(Z80._r.a<0)Z80._r.f|=0x10; Z80._r.a&=255; Z80._r.m=2;Z80._r.t=8;},
+	SBCHL: function(){Z80._r.a-=MMU.rb(Z80._r.pc); Z80._r.pc++; Z80._r.a-=(Z80._r.f&0x10)?1:0; Z80.ops.fz(Z80._r.a,1); if(Z80._r.a<0)Z80._r.f|=0x10; Z80._r.a&=255; Z80._r.m=2;Z80._r.t=8;},
 }
