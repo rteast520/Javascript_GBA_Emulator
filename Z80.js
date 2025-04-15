@@ -248,4 +248,15 @@ Z80 = {
 	//sub and sub carry flag from memory
 	SBCHL: function(){Z80._r.a-=MMU.rb((Z80._r.h<<8)+Z80._r.l); Z80._r.a-=(Z80._r.f&0x10)?1:0; Z80.ops.fz(Z80._r.a,1); if(Z80._r.a<0)Z80._r.f|=0x10; Z80._r.a&=255; Z80._r.m=2;Z80._r.t=8;},
 	SBCHL: function(){Z80._r.a-=MMU.rb(Z80._r.pc); Z80._r.pc++; Z80._r.a-=(Z80._r.f&0x10)?1:0; Z80.ops.fz(Z80._r.a,1); if(Z80._r.a<0)Z80._r.f|=0x10; Z80._r.a&=255; Z80._r.m=2;Z80._r.t=8;},
+	//function checks if carry flag will be set by subtraction operation
+	CPr_a: function(){var i = Z80._r.a; i-=Z80._r.a; Z80.ops.fz(i,1); if(i<0)Z80._r.f|=0x10; i&=255;Z80._r.m=1;Z80._r.t=4;},
+	CPr_b: function(){var i = Z80._r.a; i-=Z80._r.b; Z80.ops.fz(i,1); if(i<0)Z80._r.f|=0x10; i&=255;Z80._r.m=1;Z80._r.t=4;},
+	CPr_c: function(){var i = Z80._r.a; i-=Z80._r.c; Z80.ops.fz(i,1); if(i<0)Z80._r.f|=0x10; i&=255;Z80._r.m=1;Z80._r.t=4;},
+	CPr_d: function(){var i = Z80._r.a; i-=Z80._r.d; Z80.ops.fz(i,1); if(i<0)Z80._r.f|=0x10; i&=255;Z80._r.m=1;Z80._r.t=4;},
+	CPr_e: function(){var i = Z80._r.a; i-=Z80._r.e; Z80.ops.fz(i,1); if(i<0)Z80._r.f|=0x10; i&=255;Z80._r.m=1;Z80._r.t=4;},
+	CPr_h: function(){var i = Z80._r.a; i-=Z80._r.h; Z80.ops.fz(i,1); if(i<0)Z80._r.f|=0x10; i&=255;Z80._r.m=1;Z80._r.t=4;},
+	CPr_l: function(){var i = Z80._r.a; i-=Z80._r.l; Z80.ops.fz(i,1); if(i<0)Z80._r.f|=0x10; i&=255;Z80._r.m=1;Z80._r.t=4;},
+	//checks if value from memory would set memory flag
+	CPHL: function{var i = Z80._r.a; i-=MMU.rb((Z80._r.h<<8)+Z80._r.l); Z80.ops.fz(i,1); if(i<0)Z80._r.f|=0x10; i&=255;Z80._r.m=2;Z80._r.t=8;},
+	CPn: function{var i = Z80._r.a; i-=MMU.rb(pc);Z80._r.pc++; Z80.ops.fz(i,1); if(i<0)Z80._r.f|=0x10; i&=255;Z80._r.m=2;Z80._r.t=8;},
 }
