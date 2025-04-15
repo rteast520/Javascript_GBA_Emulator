@@ -234,6 +234,8 @@ Z80 = {
 	SUBr_e: function(){Z80._r.a-=Z80._r.e; Z80.ops.fz(Z80._r.a,1); if(Z80._r.a < 0) Z80._r.f|=0x10; Z80._r.a&=255; Z80._r,m=1;Z80._r.t=4;},
 	SUBr_h: function(){Z80._r.a-=Z80._r.h; Z80.ops.fz(Z80._r.a,1); if(Z80._r.a < 0) Z80._r.f|=0x10; Z80._r.a&=255; Z80._r,m=1;Z80._r.t=4;},
 	SUBr_l: function(){Z80._r.a-=Z80._r.l; Z80.ops.fz(Z80._r.a,1); if(Z80._r.a < 0) Z80._r.f|=0x10; Z80._r.a&=255; Z80._r,m=1;Z80._r.t=4;},
-	
+	//Sub with underflow flags for memory functions
+	SUBrHL: function(){Z80._r.a-=MMU.rb((Z80._r.h<<8)+Z80._r.l); Z80.ops.fz(Z80._r.a, 1); if(Z80._r.a < 0)Z80._r.f|=0x10; Z80._r.a&=255;Z80._r.m=2;Z80._r.t=8;},
+	SUBn: function(){Z80._r.a-=MMU.rb(Z80._r.pc); Z80._r.pc++; Z80._r.ops.fz(Z80._r.a,1); if(Z80._r.a<0)Z80._r.f|=0x10; Z80._r.a&=255; Z80._r.m=2;Z80._r.t=8},
 
 }
