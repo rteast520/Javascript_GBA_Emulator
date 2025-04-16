@@ -259,4 +259,16 @@ Z80 = {
 	//checks if value from memory would set memory flag
 	CPHL: function(){var i = Z80._r.a; i-=MMU.rb((Z80._r.h<<8)+Z80._r.l); Z80.ops.fz(i,1); if(i<0)Z80._r.f|=0x10; i&=255;Z80._r.m=2;Z80._r.t=8;},
 	CPn: function(){var i = Z80._r.a; i-=MMU.rb(pc);Z80._r.pc++; Z80.ops.fz(i,1); if(i<0)Z80._r.f|=0x10; i&=255;Z80._r.m=2;Z80._r.t=8;},
+	//bitwise AND functions
+	ANDr_a:function(){Z80._r.a&=Z80._r.a;Z80._r.a&=255;Z80.ops.fz(Z80._r.a); Z80._r.m=1;Z80._r.t=4;},
+	ANDr_b:function(){Z80._r.a&=Z80._r.b;Z80._r.a&=255;Z80.ops.fz(Z80._r.a); Z80._r.m=1;Z80._r.t=4;},
+	ANDr_c:function(){Z80._r.a&=Z80._r.c;Z80._r.a&=255;Z80.ops.fz(Z80._r.a); Z80._r.m=1;Z80._r.t=4;},
+	ANDr_d:function(){Z80._r.a&=Z80._r.d;Z80._r.a&=255;Z80.ops.fz(Z80._r.a); Z80._r.m=1;Z80._r.t=4;},
+	ANDr_e:function(){Z80._r.a&=Z80._r.e;Z80._r.a&=255;Z80.ops.fz(Z80._r.a); Z80._r.m=1;Z80._r.t=4;},
+	ANDr_h:function(){Z80._r.a&=Z80._r.h;Z80._r.a&=255;Z80.ops.fz(Z80._r.a); Z80._r.m=1;Z80._r.t=4;},
+	ANDr_l:function(){Z80._r.a&=Z80._r.l;Z80._r.a&=255;Z80.ops.fz(Z80._r.a); Z80._r.m=1;Z80._r.t=4;},
+	ANDHL: function(){Z80._r.a&=MMU.rb((Z80._r.h<<8)+Z80._r.l);Z80._r.a&=255;Z80.ops.fz(Z80._r.a); Z80._r.m=2;Z80._r.t=8;},
+	ANDn: function(){Z80._r.a&=MMU.rb(pc);Z80._r.pc++;Z80._r.a&=255;Z80.ops.fz(Z80._r.a); Z80._r.m=2;Z80._r.t=8;},
+	//
+
 }
