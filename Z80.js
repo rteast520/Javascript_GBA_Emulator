@@ -279,6 +279,16 @@ Z80 = {
 	ORr_l:function(){Z80._r.a|=Z80._r.l;Z80._r.a&=255;Z80.ops.fz(Z80._r.a); Z80._r.m=1;Z80._r.t=4;},
 	ORHL:function(){Z80._r.a|=MMU.rb((Z80._r.h<<8)+Z80._r.l);Z80._r.a&=255;Z80.ops.fz(Z80._r.a); Z80._r.m=2;Z80._r.t=8;},
 	ORn:function(){Z80._r.a|=MMU.rb(pc);Z80._r.pc++;Z80._r.a&=255;Z80.ops.fz(Z80._r.a); Z80._r.m=2;Z80._r.t=8;},
-	//
+	//bitwise xor functions
+	XORr_a:function(){Z80._r.a^=Z80._r.a;Z80._r.a&=255;Z80.ops.fz(Z80._r.a); Z80._r.m=1;Z80._r.t=4;},
+	XORr_b:function(){Z80._r.a^=Z80._r.b;Z80._r.a&=255;Z80.ops.fz(Z80._r.a); Z80._r.m=1;Z80._r.t=4;},
+	XORr_c:function(){Z80._r.a^=Z80._r.c;Z80._r.a&=255;Z80.ops.fz(Z80._r.a); Z80._r.m=1;Z80._r.t=4;},
+	XORr_d:function(){Z80._r.a^=Z80._r.d;Z80._r.a&=255;Z80.ops.fz(Z80._r.a); Z80._r.m=1;Z80._r.t=4;},
+	XORr_e:function(){Z80._r.a^=Z80._r.e;Z80._r.a&=255;Z80.ops.fz(Z80._r.a); Z80._r.m=1;Z80._r.t=4;},
+	XORr_h:function(){Z80._r.a^=Z80._r.h;Z80._r.a&=255;Z80.ops.fz(Z80._r.a); Z80._r.m=1;Z80._r.t=4;},
+	XORr_l:function(){Z80._r.a^=Z80._r.l;Z80._r.a&=255;Z80.ops.fz(Z80._r.a); Z80._r.m=1;Z80._r.t=4;},
+	XORHL:function(){Z80._r.a^=MMU.rb((Z80._r.h<<8)+Z80._r.l);Z80._r.a&=255;Z80.ops.fz(Z80._r.a); Z80._r.m=2;Z80._r.t=8;},
+	XORn:function(){Z80._r.a^=MMU.rb(pc);Z80._r.pc++;Z80._r.a&=255;Z80.ops.fz(Z80._r.a); Z80._r.m=2;Z80._r.t=8;},
+	//Increment reg functions
 
 }
