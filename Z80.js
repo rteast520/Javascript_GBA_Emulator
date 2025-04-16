@@ -307,10 +307,24 @@ Z80 = {
 	DECr_h: function(){Z80._r.h--; Z80._r.h&=255; Z80.ops.fz(Z80._r.h); Z80._r.m=1;Z80._r.t=4;},
 	DECr_l: function(){Z80._r.l--; Z80._r.l&=255; Z80.ops.fz(Z80._r.l); Z80._r.m=1;Z80._r.t=4;},
 	DECHLm: function(){var i=MMU.rb((Z80._r.h<<8)+Z80._r.l)-1; i&=255; MMU.wb((Z80._r.h<<8)+Z80._r.l, i);Z80.ops.fz(i); Z80._r.m=3;Z80._r.t=12;},
-	//
+	//increment regs in pairs
 	INCBC: function(){Z80._r.c++;Z80._r.c&=255; if(!Z80._r.c) {Z80._r.b++;Z80._r.b&=255;} Z80._r.m=1;Z80._r.t=4;},
 	INCDE: function(){Z80._r.e++;Z80._r.e&=255; if(!Z80._r.e) {Z80._r.d++;Z80._r.d&=255;} Z80._r.m=1;Z80._r.t=4;},
 	INCBC: function(){Z80._r.l++;Z80._r.l&=255; if(!Z80._r.l) {Z80._r.h++;Z80._r.h&=255;} Z80._r.m=1;Z80._r.t=4;},
 	INCSP: function(){Z80._r.sp=Z80._r.sp+1&65535;Z80._r.m=1;Z80._r.t=4;},
+	//decrement registers in pairs
+	DECBC: function(){Z80._r.c--;Z80._r.c&=255; if(Z80._r.c==255) {Z80._r.b--;Z80._r.b&=255;} Z80._r.m=1;Z80._r.t=4;},
+	DECDE: function(){Z80._r.e--;Z80._r.e&=255; if(Z80._r.e==255) {Z80._r.d--;Z80._r.d&=255;} Z80._r.m=1;Z80._r.t=4;},
+	DECBC: function(){Z80._r.l--;Z80._r.l&=255; if(Z80._r.l==255) {Z80._r.h--;Z80._r.h&=255;} Z80._r.m=1;Z80._r.t=4;},
+	DECSP: function(){Z80._r.sp=Z80._r.sp-1&65535;Z80._r.m=1;Z80._r.t=4;},
+	//functions for bit manipulation 0x1
+	BIT0a: function{Z80.ops.fz(Z80._r.a&0x01); Z80._r.m=2;Z80._r.t=8;},
+	BIT0b: function{Z80.ops.fz(Z80._r.b&0x01); Z80._r.m=2;Z80._r.t=8;},
+	BIT0c: function{Z80.ops.fz(Z80._r.c&0x01); Z80._r.m=2;Z80._r.t=8;},
+	BIT0d: function{Z80.ops.fz(Z80._r.d&0x01); Z80._r.m=2;Z80._r.t=8;},
+	BIT0e: function{Z80.ops.fz(Z80._r.e&0x01); Z80._r.m=2;Z80._r.t=8;},
+	BIT0h: function{Z80.ops.fz(Z80._r.h&0x01); Z80._r.m=2;Z80._r.t=8;},
+	BIT0l: function{Z80.ops.fz(Z80._r.l&0x01); Z80._r.m=2;Z80._r.t=8;},
+	BIT0m: function{Z80.ops.fz(MMU.rb((Z80._r.h<<8)+Z80._r.l)&0x01); Z80._r.m=3;Z80._r.t=12;},
 
 }
