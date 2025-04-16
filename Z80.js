@@ -269,6 +269,16 @@ Z80 = {
 	ANDr_l:function(){Z80._r.a&=Z80._r.l;Z80._r.a&=255;Z80.ops.fz(Z80._r.a); Z80._r.m=1;Z80._r.t=4;},
 	ANDHL: function(){Z80._r.a&=MMU.rb((Z80._r.h<<8)+Z80._r.l);Z80._r.a&=255;Z80.ops.fz(Z80._r.a); Z80._r.m=2;Z80._r.t=8;},
 	ANDn: function(){Z80._r.a&=MMU.rb(pc);Z80._r.pc++;Z80._r.a&=255;Z80.ops.fz(Z80._r.a); Z80._r.m=2;Z80._r.t=8;},
+	//bitwise or functions
+	ORr_a:function(){Z80._r.a|=Z80._r.a;Z80._r.a&=255;Z80.ops.fz(Z80._r.a); Z80._r.m=1;Z80._r.t=4;},
+	ORr_b:function(){Z80._r.a|=Z80._r.b;Z80._r.a&=255;Z80.ops.fz(Z80._r.a); Z80._r.m=1;Z80._r.t=4;},
+	ORr_c:function(){Z80._r.a|=Z80._r.c;Z80._r.a&=255;Z80.ops.fz(Z80._r.a); Z80._r.m=1;Z80._r.t=4;},
+	ORr_d:function(){Z80._r.a|=Z80._r.d;Z80._r.a&=255;Z80.ops.fz(Z80._r.a); Z80._r.m=1;Z80._r.t=4;},
+	ORr_e:function(){Z80._r.a|=Z80._r.e;Z80._r.a&=255;Z80.ops.fz(Z80._r.a); Z80._r.m=1;Z80._r.t=4;},
+	ORr_h:function(){Z80._r.a|=Z80._r.h;Z80._r.a&=255;Z80.ops.fz(Z80._r.a); Z80._r.m=1;Z80._r.t=4;},
+	ORr_l:function(){Z80._r.a|=Z80._r.l;Z80._r.a&=255;Z80.ops.fz(Z80._r.a); Z80._r.m=1;Z80._r.t=4;},
+	ORHL:function(){Z80._r.a|=MMU.rb((Z80._r.h<<8)+Z80._r.l);Z80._r.a&=255;Z80.ops.fz(Z80._r.a); Z80._r.m=2;Z80._r.t=8;},
+	ORn:function(){Z80._r.a|=MMU.rb(pc);Z80._r.pc++;Z80._r.a&=255;Z80.ops.fz(Z80._r.a); Z80._r.m=2;Z80._r.t=8;},
 	//
 
 }
