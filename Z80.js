@@ -390,12 +390,12 @@ Z80 = {
 	BIT7h: function(){Z80.ops.fz(Z80._r.h&0x80); Z80._r.m=2;Z80._r.t=8;},
 	BIT7l: function(){Z80.ops.fz(Z80._r.l&0X80); Z80._r.m=2;Z80._r.t=8;},
 	BIT7m: function(){Z80.ops.fz(MMU.rb((Z80._r.h<<8)+Z80._r.l)&0x80); Z80._r.m=3;Z80._r.t=12;},
-	//
+	//rotate for a anf f regs
 	RLA: function(){var i=Z80._r.f&0x10?1:0; var o=Z80._r.a&0x80?0x10:0; Z80._r.a=(Z80._r.a<<1)+i; Z80._r.a&=255; Z80._r.f=(Z80._r.f&0xEF)+o;Z80._r.m=1;Z80._r.t=4;},
 	RLCA: function(){var i=Z80._r.a&0x80?1:0;var o=Z80._r.a&0x80?0x10:0; Z80._r.a=(Z80._r.a<<1)+i; Z80._r.a&=255; Z80._r.f=(Z80._r.f&0xEF)+o;Z80._r.m=1;Z80._r.t=4;},
 	RRA: function(){var i=Z80._r.f&0x10?0x80:0; var o=Z80._r.a&1?0x10:0; Z80._r.a=(Z80._r.a>>1)+i; Z80._r.a&=255; Z80._r.f=(Z80._r.f&0xEF)+o;Z80._r.m=1;Z80._r.t=4; },
     RRCA: function(){var i=Z80._r.a&1?0x80:0; var o=Z80._r.a&1?0x10:0; Z80._r.a=(Z80._r.a>>1)+i; Z80._r.a&=255; Z80._r.f=(Z80._r.f&0xEF)+o;Z80._r.m=1;Z80._r.t=4;},
-	//multiply by 2, check last bit and all other bits and add last bit to a and all other to f
+	//rotate left, check last bit and all other bits and add last bit to a and all other to f
 	RLr_a: function(){var i=Z80._r.f&0x10?1:0; var o=Z80._r.a&0x80?0x10:0; Z80._r.a=(Z80._r.a<<1)+i; Z80._r.a&=255; Z80.ops.fz(Z80._r.a);Z80._r.f=(Z80._r.f&0xEF)+o;Z80._r.m=2;Z80._r.t=8;},
 	RLr_b: function(){var i=Z80._r.f&0x10?1:0; var o=Z80._r.b&0x80?0x10:0; Z80._r.b=(Z80._r.b<<1)+i; Z80._r.b&=255; Z80.ops.fz(Z80._r.b);Z80._r.f=(Z80._r.f&0xEF)+o;Z80._r.m=2;Z80._r.t=8;},
 	RLr_c: function(){var i=Z80._r.f&0x10?1:0; var o=Z80._r.c&0x80?0x10:0; Z80._r.c=(Z80._r.c<<1)+i; Z80._r.c&=255; Z80.ops.fz(Z80._r.c);Z80._r.f=(Z80._r.f&0xEF)+o;Z80._r.m=2;Z80._r.t=8;},
@@ -404,7 +404,7 @@ Z80 = {
 	RLr_h: function(){var i=Z80._r.f&0x10?1:0; var o=Z80._r.h&0x80?0x10:0; Z80._r.h=(Z80._r.h<<1)+i; Z80._r.h&=255; Z80.ops.fz(Z80._r.h);Z80._r.f=(Z80._r.f&0xEF)+o;Z80._r.m=2;Z80._r.t=8;},
 	RLr_l: function(){var i=Z80._r.f&0x10?1:0; var o=Z80._r.l&0x80?0x10:0; Z80._r.l=(Z80._r.l<<1)+i; Z80._r.l&=255; Z80.ops.fz(Z80._r.l);Z80._r.f=(Z80._r.f&0xEF)+o;Z80._r.m=2;Z80._r.t=8;},
 	RLHL: function(){var i=MMU.rb((Z80._r.h<<8)+Z80._r.l); var fi=Z80._r.f&0x10?1:0; var o=i&0x80?0x10:0; i=(i<<1)+fi; i&=255; Z80.ops.fz(i);MMU.wb((Z80._r.h<<8)+Z80._r.l,i);Z80._r.f=(Z80._r.f&0xEF)+o;Z80._r.m=4;Z80._r.t=16;},
-	//check bits multiply bu two and carry over the flags
+	//check bits roatete left and carry over the flags
 	RLCr_a: function(){var i=Z80._r.a&0x80?1:0; var o=Z80._r.a&0x80?0x10:0; Z80._r.a=(Z80._r.a<<1)+i;Z80._r.a&=255;Z80.ops.fz(Z80._r.a);Z80._r.f=(Z80._r.f&0xEF)+o;Z80._r.m=2;Z80._r.t=8;},
 	RLCr_b: function(){var i=Z80._r.b&0x80?1:0; var o=Z80._r.b&0x80?0x10:0; Z80._r.b=(Z80._r.b<<1)+i;Z80._r.b&=255;Z80.ops.fz(Z80._r.b);Z80._r.f=(Z80._r.f&0xEF)+o;Z80._r.m=2;Z80._r.t=8;},
 	RLCr_c: function(){var i=Z80._r.c&0x80?1:0; var o=Z80._r.c&0x80?0x10:0; Z80._r.c=(Z80._r.c<<1)+i;Z80._r.c&=255;Z80.ops.fz(Z80._r.c);Z80._r.f=(Z80._r.f&0xEF)+o;Z80._r.m=2;Z80._r.t=8;},
@@ -413,5 +413,13 @@ Z80 = {
 	RLCr_h: function(){var i=Z80._r.h&0x80?1:0; var o=Z80._r.h&0x80?0x10:0; Z80._r.h=(Z80._r.h<<1)+i;Z80._r.h&=255;Z80.ops.fz(Z80._r.h);Z80._r.f=(Z80._r.f&0xEF)+o;Z80._r.m=2;Z80._r.t=8;},
 	RLCr_l: function(){var i=Z80._r.l&0x80?1:0; var o=Z80._r.l&0x80?0x10:0; Z80._r.l=(Z80._r.l<<1)+i;Z80._r.l&=255;Z80.ops.fz(Z80._r.l);Z80._r.f=(Z80._r.f&0xEF)+o;Z80._r.m=2;Z80._r.t=8;},
 	RLCHL: function(){var i=MMU.rb((Z80._r.h<<8)+Z80._r.l); var fi=i&0x80?1:0; var o=i&0x80?0x10:0; i=(i<<1)+fi; i&=255; Z80.ops.fz(i);MMU.wb((Z80._r.h<<8)+Z80._r.l,i);Z80._r.f=(Z80._r.f&0xEF)+o;Z80._r.m=4;Z80._r.t=16;},
-	//
+	//rotate right and set flages
+	RRr_a: function(){var i = Z80._r.f&0x10?0x80:0; var o=Z80._r.a&1?0x10:0; Z80._r.a=(Z80._r.a>>1)+i; Z80._r.a&=255; Z80.ops.fz(Z80._r.a);Z80._r.f=(Z80._r.f&0xEF)+o;Z80._r.m=2;Z80._r.t=8;},
+	RRr_b: function(){var i = Z80._r.f&0x10?0x80:0; var o=Z80._r.b&1?0x10:0; Z80._r.b=(Z80._r.a>>1)+i; Z80._r.b&=255; Z80.ops.fz(Z80._r.b);Z80._r.f=(Z80._r.f&0xEF)+o;Z80._r.m=2;Z80._r.t=8;},
+	RRr_c: function(){var i = Z80._r.f&0x10?0x80:0; var o=Z80._r.c&1?0x10:0; Z80._r.c=(Z80._r.a>>1)+i; Z80._r.c&=255; Z80.ops.fz(Z80._r.c);Z80._r.f=(Z80._r.f&0xEF)+o;Z80._r.m=2;Z80._r.t=8;},
+	RRr_d: function(){var i = Z80._r.f&0x10?0x80:0; var o=Z80._r.d&1?0x10:0; Z80._r.d=(Z80._r.a>>1)+i; Z80._r.d&=255; Z80.ops.fz(Z80._r.d);Z80._r.f=(Z80._r.f&0xEF)+o;Z80._r.m=2;Z80._r.t=8;},
+	RRr_e: function(){var i = Z80._r.f&0x10?0x80:0; var o=Z80._r.e&1?0x10:0; Z80._r.e=(Z80._r.a>>1)+i; Z80._r.e&=255; Z80.ops.fz(Z80._r.e);Z80._r.f=(Z80._r.f&0xEF)+o;Z80._r.m=2;Z80._r.t=8;},
+	RRr_h: function(){var i = Z80._r.f&0x10?0x80:0; var o=Z80._r.h&1?0x10:0; Z80._r.h=(Z80._r.a>>1)+i; Z80._r.h&=255; Z80.ops.fz(Z80._r.h);Z80._r.f=(Z80._r.f&0xEF)+o;Z80._r.m=2;Z80._r.t=8;},
+	RRr_l: function(){var i = Z80._r.f&0x10?0x80:0; var o=Z80._r.l&1?0x10:0; Z80._r.l=(Z80._r.a>>1)+i; Z80._r.l&=255; Z80.ops.fz(Z80._r.l);Z80._r.f=(Z80._r.f&0xEF)+o;Z80._r.m=2;Z80._r.t=8;},
+	RRr_a: function(){var i = MMU.rb((Z80._r.h<<8)+Z80._r.l);var fi = Z80._r.f&0x10?0x80:0; var o=i&1?0x10:0; i=(i>>1)+fi; i&=255; MMU.wb((Z80._r.h<<8)+Z80._r.l,i); Z80.ops.fz(i);Z80._r.f=(Z80._r.f&0xEF)+o;Z80._r.m=2;Z80._r.t=8;},
 }
