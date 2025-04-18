@@ -421,5 +421,22 @@ Z80 = {
 	RRr_e: function(){var i = Z80._r.f&0x10?0x80:0; var o=Z80._r.e&1?0x10:0; Z80._r.e=(Z80._r.a>>1)+i; Z80._r.e&=255; Z80.ops.fz(Z80._r.e);Z80._r.f=(Z80._r.f&0xEF)+o;Z80._r.m=2;Z80._r.t=8;},
 	RRr_h: function(){var i = Z80._r.f&0x10?0x80:0; var o=Z80._r.h&1?0x10:0; Z80._r.h=(Z80._r.a>>1)+i; Z80._r.h&=255; Z80.ops.fz(Z80._r.h);Z80._r.f=(Z80._r.f&0xEF)+o;Z80._r.m=2;Z80._r.t=8;},
 	RRr_l: function(){var i = Z80._r.f&0x10?0x80:0; var o=Z80._r.l&1?0x10:0; Z80._r.l=(Z80._r.a>>1)+i; Z80._r.l&=255; Z80.ops.fz(Z80._r.l);Z80._r.f=(Z80._r.f&0xEF)+o;Z80._r.m=2;Z80._r.t=8;},
-	RRr_a: function(){var i = MMU.rb((Z80._r.h<<8)+Z80._r.l);var fi = Z80._r.f&0x10?0x80:0; var o=i&1?0x10:0; i=(i>>1)+fi; i&=255; MMU.wb((Z80._r.h<<8)+Z80._r.l,i); Z80.ops.fz(i);Z80._r.f=(Z80._r.f&0xEF)+o;Z80._r.m=2;Z80._r.t=8;},
+	RRHL: function(){var i = MMU.rb((Z80._r.h<<8)+Z80._r.l);var fi = Z80._r.f&0x10?0x80:0; var o=i&1?0x10:0; i=(i>>1)+fi; i&=255; MMU.wb((Z80._r.h<<8)+Z80._r.l,i); Z80.ops.fz(i);Z80._r.f=(Z80._r.f&0xEF)+o;Z80._r.m=4;Z80._r.t=16;},
+	//rotare right and carry
+	RRCr_a: function(){var i = Z80._r.a&1?0x80:0; var o=Z80._r.a&1?0x10:0; Z80._r.a=(Z80._r.a>>1)+i; Z80._r.a&=255; Z80.ops.fz(Z80._r.a);Z80._r.f=(Z80._r.f&0xEF)+o;Z80._r.m=2;Z80._r.t=8;},
+	RRCr_b: function(){var i = Z80._r.b&1?0x80:0; var o=Z80._r.b&1?0x10:0; Z80._r.b=(Z80._r.b>>1)+i; Z80._r.b&=255; Z80.ops.fz(Z80._r.b);Z80._r.f=(Z80._r.f&0xEF)+o;Z80._r.m=2;Z80._r.t=8;},
+	RRCr_c: function(){var i = Z80._r.c&1?0x80:0; var o=Z80._r.c&1?0x10:0; Z80._r.c=(Z80._r.c>>1)+i; Z80._r.c&=255; Z80.ops.fz(Z80._r.c);Z80._r.f=(Z80._r.f&0xEF)+o;Z80._r.m=2;Z80._r.t=8;},
+	RRCr_d: function(){var i = Z80._r.d&1?0x80:0; var o=Z80._r.d&1?0x10:0; Z80._r.d=(Z80._r.d>>1)+i; Z80._r.d&=255; Z80.ops.fz(Z80._r.d);Z80._r.f=(Z80._r.f&0xEF)+o;Z80._r.m=2;Z80._r.t=8;},
+	RRCr_e: function(){var i = Z80._r.e&1?0x80:0; var o=Z80._r.e&1?0x10:0; Z80._r.e=(Z80._r.e>>1)+i; Z80._r.e&=255; Z80.ops.fz(Z80._r.e);Z80._r.f=(Z80._r.f&0xEF)+o;Z80._r.m=2;Z80._r.t=8;},
+	RRCr_h: function(){var i = Z80._r.h&1?0x80:0; var o=Z80._r.h&1?0x10:0; Z80._r.h=(Z80._r.h>>1)+i; Z80._r.h&=255; Z80.ops.fz(Z80._r.h);Z80._r.f=(Z80._r.f&0xEF)+o;Z80._r.m=2;Z80._r.t=8;},
+	RRCr_l: function(){var i = Z80._r.l&1?0x80:0; var o=Z80._r.l&1?0x10:0; Z80._r.l=(Z80._r.l>>1)+i; Z80._r.l&=255; Z80.ops.fz(Z80._r.l);Z80._r.f=(Z80._r.f&0xEF)+o;Z80._r.m=2;Z80._r.t=8;},
+	RRCHL: function(){var i = MMU.rb((Z80._r.h<<8)+Z80._r.l);var fi = i&1?0x80:0; var o=i&1?0x10:0; i=(i>>1)+fi; i&=255; MMU.wb((Z80._r.h<<8)+Z80._r.l,i); Z80.ops.fz(i);Z80._r.f=(Z80._r.f&0xEF)+o;Z80._r.m=4;Z80._r.t=16;},
+	//set last address function
+	SLAr_a: function(){var o= Z80._r.a&0x80?0x10:0; var i= (Z80._r.a<<1)&255; Z80.ops.fz(Z80._r.a); Z80._r.f=(Z80._r.f&0xEF)+o; Z80._r.m=2;Z80._r.t=8;},
+	SLAr_b: function(){var o= Z80._r.b&0x80?0x10:0; var i= (Z80._r.b<<1)&255; Z80.ops.fz(Z80._r.b); Z80._r.f=(Z80._r.f&0xEF)+o; Z80._r.m=2;Z80._r.t=8;},
+	SLAr_c: function(){var o= Z80._r.c&0x80?0x10:0; var i= (Z80._r.c<<1)&255; Z80.ops.fz(Z80._r.c); Z80._r.f=(Z80._r.f&0xEF)+o; Z80._r.m=2;Z80._r.t=8;},
+	SLAr_d: function(){var o= Z80._r.d&0x80?0x10:0; var i= (Z80._r.d<<1)&255; Z80.ops.fz(Z80._r.d); Z80._r.f=(Z80._r.f&0xEF)+o; Z80._r.m=2;Z80._r.t=8;},
+	SLAr_e: function(){var o= Z80._r.e&0x80?0x10:0; var i= (Z80._r.e<<1)&255; Z80.ops.fz(Z80._r.e); Z80._r.f=(Z80._r.f&0xEF)+o; Z80._r.m=2;Z80._r.t=8;},
+	SLAr_h: function(){var o= Z80._r.h&0x80?0x10:0; var i= (Z80._r.h<<1)&255; Z80.ops.fz(Z80._r.h); Z80._r.f=(Z80._r.f&0xEF)+o; Z80._r.m=2;Z80._r.t=8;},
+	SLAr_l: function(){var o= Z80._r.l&0x80?0x10:0; var i= (Z80._r.l<<1)&255; Z80.ops.fz(Z80._r.l); Z80._r.f=(Z80._r.f&0xEF)+o; Z80._r.m=2;Z80._r.t=8;},
 }
