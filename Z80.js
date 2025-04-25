@@ -439,7 +439,7 @@ Z80 = {
 	SLAr_e: function(){var o= Z80._r.e&0x80?0x10:0; var i= (Z80._r.e<<1)&255; Z80.ops.fz(Z80._r.e); Z80._r.f=(Z80._r.f&0xEF)+o; Z80._r.m=2;Z80._r.t=8;},
 	SLAr_h: function(){var o= Z80._r.h&0x80?0x10:0; var i= (Z80._r.h<<1)&255; Z80.ops.fz(Z80._r.h); Z80._r.f=(Z80._r.f&0xEF)+o; Z80._r.m=2;Z80._r.t=8;},
 	SLAr_l: function(){var o= Z80._r.l&0x80?0x10:0; var i= (Z80._r.l<<1)&255; Z80.ops.fz(Z80._r.l); Z80._r.f=(Z80._r.f&0xEF)+o; Z80._r.m=2;Z80._r.t=8;},
-	//
+	//set last address and add one function
 	SLLr_a: function(){var o= Z80._r.a&0x80?0x10:0; var i= (Z80._r.a<<1)&255+1; Z80.ops.fz(Z80._r.a); Z80._r.f=(Z80._r.f&0xEF)+o; Z80._r.m=2;Z80._r.t=8;},
 	SLLr_b: function(){var o= Z80._r.b&0x80?0x10:0; var i= (Z80._r.b<<1)&255+1; Z80.ops.fz(Z80._r.b); Z80._r.f=(Z80._r.f&0xEF)+o; Z80._r.m=2;Z80._r.t=8;},
 	SLLr_c: function(){var o= Z80._r.c&0x80?0x10:0; var i= (Z80._r.c<<1)&255+1; Z80.ops.fz(Z80._r.c); Z80._r.f=(Z80._r.f&0xEF)+o; Z80._r.m=2;Z80._r.t=8;},
@@ -447,4 +447,6 @@ Z80 = {
 	SLLr_e: function(){var o= Z80._r.e&0x80?0x10:0; var i= (Z80._r.e<<1)&255+1; Z80.ops.fz(Z80._r.e); Z80._r.f=(Z80._r.f&0xEF)+o; Z80._r.m=2;Z80._r.t=8;},
 	SLLr_h: function(){var o= Z80._r.h&0x80?0x10:0; var i= (Z80._r.h<<1)&255+1; Z80.ops.fz(Z80._r.h); Z80._r.f=(Z80._r.f&0xEF)+o; Z80._r.m=2;Z80._r.t=8;},
 	SLLr_l: function(){var o= Z80._r.l&0x80?0x10:0; var i= (Z80._r.l<<1)&255+1; Z80.ops.fz(Z80._r.l); Z80._r.f=(Z80._r.f&0xEF)+o; Z80._r.m=2;Z80._r.t=8;},
+	//
+	
 }
